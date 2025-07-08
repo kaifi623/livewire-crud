@@ -66,9 +66,9 @@ public function confirmDelete()
     }
 
     public function closeForm(){
-       // $this->resetFields();
+       $this->resetFields();
        $this->cancel();
-        $this->showForm=false;
+       $this->showForm=false;
     }
 
      public function store()

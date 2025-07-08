@@ -31,7 +31,7 @@
     <table class="w-full table-auto border border-gray-200">
         <thead class="bg-gray-100">
             <tr>
-                <th class="border px-4 py-2">ID</th>
+                <th class="border px-4 py-2">S-NO</th>
                 <th class="border px-4 py-2">TITLE</th>
                 <th class="border px-4 py-2">DESCRIPTION</th>
                 <th class="border px-4 py-2">ACTIONS</th>
@@ -41,12 +41,12 @@
             @if ($posts)
                 @foreach($posts as $post)
                 <tr class="hover:bg-gray-50">
-                    <td class="border px-4 py-2 text-center">{{ $post->id }}</td>
+                    <td class="border px-4 py-2 text-center">{{ $loop->iteration }}</td>
                     <td class="border px-4 py-2 text-center">{{ $post->title }}</td>
                     <td class="border px-4 py-2 text-center">{{ $post->description }}</td>
                     <td class="border px-4 py-2 text-center">
                         <button wire:click="edit({{ $post->id }})"
-                            class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 cursor-pointer">
+                            class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 cursor-pointer" >
                             Edit
                         </button>
                         <button wire:click="delete({{ $post->id }})"
@@ -160,13 +160,12 @@
 
     {{-- modal for new post --}}
 
-     @if ($showForm)
+   @if ($showForm)
     <div class="fixed inset-0 bg-black/50 bg-opacity-50 flex items-center justify-center z-50">
         <div class="bg-white rounded-lg p-6 w-1/3 shadow-lg">
             <h2 class="text-xl font-semibold mb-4">Create Post</h2>
 
             <form wire:submit.prevent="store">
-
                 <div class="mb-4">
                     <label class="block mb-1 font-medium">Title</label>
                     <input type="text" wire:model="title"
@@ -180,20 +179,24 @@
                         class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-300"
                         required></textarea>
                 </div>
-                <div class="flex justify-end space-x-2">
-                    <button
-                        class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 cursor-pointer">Create</button>
 
-                    <button wire:click="closeForm"
-                        class="px-4 py-2 bg-gray-400 text-white rounded hover:bg-gray-500 cursor-pointer">Cancel</button>
+                <div class="flex justify-end">
+                    <button type="submit"
+                        class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 cursor-pointer">
+                        Create
+                    </button>
                 </div>
             </form>
 
-
-
+            <div class="flex justify-end mt-2">
+                <button wire:click="closeForm"
+                    class="px-4 py-2 bg-gray-400 text-white rounded hover:bg-gray-500 cursor-pointer">
+                    Cancel
+                </button>
+            </div>
         </div>
     </div>
-    @endif
+@endif
 
 
 </div>
